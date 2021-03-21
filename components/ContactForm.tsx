@@ -2,7 +2,7 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  ChangeEventHandler, FC, FormEventHandler, useState,
+  ChangeEventHandler, FC, FocusEventHandler, FormEventHandler, useState,
 } from 'react';
 import { checkCompanyValid, createNewMeeting } from '../lib/firebase';
 import { MeetingInfo } from '../lib/types';
@@ -29,6 +29,7 @@ const ContactForm : FC = () => {
   });
   const handleSubmit : FormEventHandler = async (event) => {
     event.preventDefault();
+    event.stopPropagation();
     setIsSubmitting(true);
     try {
       const isCompanyValid = await checkCompanyValid(formValues.company.toUpperCase());
@@ -82,6 +83,10 @@ const ContactForm : FC = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleBlur : FocusEventHandler = (event) => {
+    event.preventDefault();
+  };
   return (isSubmitting)
     ? (
       <div className="schedule-meeting__contact">
@@ -111,6 +116,7 @@ const ContactForm : FC = () => {
                   type="text"
                   name="names"
                   value={formValues.names}
+                  onBlur={handleBlur}
                 />
                 { errors.names ? <div className="schedule-meeting__form-error">{errors.names}</div> : null }
               </label>

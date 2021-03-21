@@ -4,6 +4,7 @@
   background-color: $darkBlue;
   color: #ffffff;
   min-height: 50vh;
+  height: 100%;
   // Fondo imágenes
   background-image: url("/img/circulo-lineas-abajo.png"),
     url("/img/circulo-lineas-arriba.png"),
@@ -75,6 +76,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
     &-success {
       &-icon {
         color: #60ca36;
@@ -92,6 +94,10 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 0 1 auto;
+    position: relative;
     &-error {
       color: #ff553f;
       font-size: .8rem;
